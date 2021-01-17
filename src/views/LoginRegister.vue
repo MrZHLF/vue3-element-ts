@@ -1,44 +1,57 @@
 <template>
-    <div class="container" :class="{'sign-up-mode':signUpMode}">
-        <div class="forms-container">
-            <div class="signin-signup">
-                <!-- 登录 -->
-                    <h1>登录</h1>
-                <!-- 注册 -->
-                    <h1>注册</h1>
-            </div>
-        </div>
-        <!-- 左右切换动画 -->
-        <div class="panels-container">
-            <div class="panel left-panel">
-                <div class="content">
-                    <h3>学习是为了有更多的选择,让生活变的更美好!</h3>
-                    <p>何以解忧,唯有米修</p>
-                    <button @click="signUpMode = !signUpMode" class="btn transparent">注册 </button>
-                </div>
-                <img src="@/assets/img/log.svg" class="image" alt="" />
-            </div>
-            <div class="panel right-panel">
-                <div class="content">
-                    <h3>以人为镜,可明得失, 以代码为镜,可通逻辑!</h3>
-                    <p>学习编程,让你的生活更有趣</p>
-                    <button @click="signUpMode = !signUpMode" class="btn transparent">登录</button>
-                </div>
-                <img src="@/assets/img/register.svg" class="image" alt="" />
-            </div>
-        </div>
+  <div class="container"
+       :class="{'sign-up-mode':signUpMode}">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <!-- 登录 -->
+        <login-form :loginUser="loginUser" :rules="rules"></login-form>
+        <!-- 注册 -->
+
+      </div>
     </div>
+    <!-- 左右切换动画 -->
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>学习是为了有更多的选择,让生活变的更美好!</h3>
+          <p>何以解忧,唯有米修</p>
+          <button @click="signUpMode = !signUpMode"
+                  class="btn transparent">注册 </button>
+        </div>
+        <img src="@/assets/img/log.svg"
+             class="image"
+             alt="" />
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>以人为镜,可明得失, 以代码为镜,可通逻辑!</h3>
+          <p>学习编程,让你的生活更有趣</p>
+          <button @click="signUpMode = !signUpMode"
+                  class="btn transparent">登录</button>
+        </div>
+        <img src="@/assets/img/register.svg"
+             class="image"
+             alt="" />
+      </div>
+    </div>
+  </div>
 </template>
-<script>
-import { ref } from 'vue'
+<script lang="ts">
+import { ref,getCurrentInstance } from 'vue'
+import { loginUser, rules } from '@/utils/LoginValidators'
+import LoginForm from './../components/LoginForm.vue'
 export default {
-    name:"LoginRegister",
-    setup() {
-        const signUpMode = ref(false)
-        return {
-            signUpMode
-        }
+	name: "LoginRegister",
+	components:{LoginForm},
+  setup () {
+		const signUpMode = ref<boolean>(false)
+		
+    return {
+      signUpMode,
+			loginUser,
+			rules,
     }
+  }
 }
 </script>
 <style scoped>
